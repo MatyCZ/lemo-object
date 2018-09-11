@@ -1,0 +1,20 @@
+{
+  "name": "lemo-object",
+  "description": "Lemo object",
+  "version": "0.2.0",
+  "main": "src/index.js",
+  "author": "Matej Szendi <matej.szendi@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MatyCZ/lemo-object"
+  },
+  "scripts": {
+    "build": "npm run build"
+  },
+  "dependencies": {
+  },
+  "files": [
+    "src/"
+  ]
+}
