@@ -31,24 +31,24 @@ function isArray(a) {
 }
 
 function isObject(a) {
-    return !Array.isArray(a) && typeof a === 'object' && a !== null;
+    return !Array.isArray(a) && typeof a === "object" && a !== null;
 }
 
 function makePathArray(path) {
-
     if (typeof path !== "string" && isArray(path)) {
         return path;
     }
 
     return path
-        .replace(/\[(\d+)]/g, '.__int__$1')
-        .replace(/\[([^[\]]*)]/g, '.$1')
-        .split('.')
-        .map(e => (e.indexOf('__int__') === 0 ? parseInt(e.substring(7), 10) : e));
+        .replace(/\[(\d+)]/g, ".__int__$1")
+        .replace(/\[([^[\]]*)]/g, ".$1")
+        .split(".")
+        .map(
+            e => (e.indexOf("__int__") === 0 ? parseInt(e.substring(7), 10) : e)
+        );
 }
 
 class DataMap {
-
     constructor(object = {}) {
         this.object = JSON.parse(JSON.stringify(object));
         this.map = buildMap(this.object);
@@ -59,7 +59,7 @@ class DataMap {
         return this.map.size === 0;
     }
 
-    has (path) {
+    has(path) {
         const value = this.get(path);
 
         return !!value;
@@ -128,13 +128,13 @@ class DataMap {
             if (value != null) {
                 // If the next key is a number and the cursor is not an array yet we
                 // need to initialize it.
-                if (typeof nextKey === 'number' && !isArray(cursor[key])) {
+                if (typeof nextKey === "number" && !isArray(cursor[key])) {
                     cursor[key] = [];
                     map.set(key, new Map());
                 }
                 // If the next key is not a number and the cursor is not an object yet
                 // we need to initialize it
-                if (typeof nextKey !== 'number' && !isObject(cursor[key])) {
+                if (typeof nextKey !== "number" && !isObject(cursor[key])) {
                     cursor[key] = {};
                     map.set(key, new Map());
                 }
@@ -142,10 +142,18 @@ class DataMap {
 
             // If the next cursor is an array or object then we pass down a new map
             const nextMap =
-                isObject(cursor[key]) || isArray(cursor[key]) ? map.get(key) : map;
+                isObject(cursor[key]) || isArray(cursor[key])
+                    ? map.get(key)
+                    : map;
 
             // Recur
-            set(cursor[key], nextMap, pathArray[i + 1], pathArray[i + 2], i + 1);
+            set(
+                cursor[key],
+                nextMap,
+                pathArray[i + 1],
+                pathArray[i + 2],
+                i + 1
+            );
 
             // Check map
             if (nextMap.size === 0) {
@@ -162,7 +170,6 @@ class DataMap {
         this.set(path, null, true);
         this.paths.delete(path);
     }
-
 }
 
 export default DataMap;

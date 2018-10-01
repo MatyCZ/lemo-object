@@ -1,20 +1,37 @@
 {
   "name": "lemo-object",
   "description": "Lemo object",
-  "version": "0.2.0",
-  "main": "src/index.js",
+  "version": "0.2.2",
   "author": "Matej Szendi <matej.szendi@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "lemo"
+  ],
+  "main": "lib/lemo-object.umd.js",
+  "module": "lib/lemo-object.es.js",
+  "jsnext:main": "lib/lemo-object.es.js",
+  "files": [
+    "lib",
+    "src",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/MatyCZ/lemo-object"
   },
   "scripts": {
-    "build": "npm run build"
+    "build": "rollup -c",
+    "prettier": "prettier --write 'src/**/*.{js,jsx}'",
+    "prettier:check": "prettier --list-different 'src/**/*.{js,jsx}'"
   },
-  "dependencies": {
-  },
-  "files": [
-    "src/"
-  ]
+  "devDependencies": {
+    "@babel/core": "7.x",
+    "@babel/preset-env": "7.x",
+    "@babel/preset-react": "7.x",
+    "prettier": "1.x",
+    "rollup": "0.66.x",
+    "rollup-plugin-babel": "4.x",
+    "rollup-plugin-commonjs": "8.x",
+    "rollup-plugin-node-resolve": "3.x"
+  }
 }
